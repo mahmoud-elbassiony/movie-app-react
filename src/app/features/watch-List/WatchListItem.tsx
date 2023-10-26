@@ -4,17 +4,26 @@ import "./watch-list.css";
 import watchListAddIcon from "../../../assests/watch-list-add.svg";
 import WatchListAddedIcon from "../../../assests/watch-list-added.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle } from "../../features/watch-List/watchListSlice";
+import { toggle } from "./watchListSlice";
+import { MovieType } from "../../types/Movie";
+import { MovieDetailsType } from "../../types/MovieDetails";
+import { StoreState } from "../../../store";
 
-export const WatchListItem = ({ movie }) => {
+type WatchListItemProps = {
+  movie: MovieType;
+};
+
+export const WatchListItem = ({ movie }: WatchListItemProps) => {
   const { title, poster_path, name, id, media_type, vote_average, overview } =
     movie;
 
   const dispatch = useDispatch();
   const [isInWatchList, setIsInWatchList] = useState(false);
-  const watchListState = useSelector((state) => state.watchList.value);
+  const watchListState = useSelector(
+    (state: StoreState) => state.watchList.value
+  );
 
-  const toggleWatchList = (movie) => {
+  const toggleWatchList = (movie: MovieType) => {
     dispatch(toggle(movie));
     let index = watchListState.findIndex((mov) => mov.id === id);
     if (index !== -1) {

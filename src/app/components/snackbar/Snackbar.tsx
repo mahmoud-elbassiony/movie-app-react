@@ -2,25 +2,37 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import watchListAddIcon from "../../../assests/watch-list-add.svg";
 import WatchListAddedIcon from "../../../assests/watch-list-added.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../features/watch-List/watchListSlice";
+import { MovieType } from "../../types/Movie";
+import { MovieDetailsType } from "../../types/MovieDetails";
+import { StoreState } from "../../../store";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+type SnackbarProps = {
+  movie: MovieType | MovieDetailsType;
+};
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function CustomizedSnackbars({ movie }) {
+export default function CustomizedSnackbars({ movie }: SnackbarProps) {
   const dispatch = useDispatch();
   const [isInWatchList, setIsInWatchList] = React.useState(false);
-  const watchListState = useSelector((state) => state.watchList.value);
+  const watchListState = useSelector(
+    (state: StoreState) => state.watchList.value
+  );
 
   const [open, setOpen] = React.useState(false);
   const [alertMsg, setAlertMsg] = React.useState("");
 
-  const handleClick = (movie) => {
+  const handleClick = (movie: MovieType | MovieDetailsType) => {
     setOpen(true);
     dispatch(toggle(movie));
     let index = watchListState.findIndex((mov) => mov.id === movie.id);
@@ -40,7 +52,10 @@ export default function CustomizedSnackbars({ movie }) {
     }
   }, [movie]);
 
-  const handleClose = (event, reason) => {
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -51,31 +66,21 @@ export default function CustomizedSnackbars({ movie }) {
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       {!isInWatchList && (
-        <img
-          src={watchListAddIcon}
-          alt=""
-          variant="outlined"
-          onClick={() => handleClick(movie)}
-        />
+        <img src={watchListAddIcon} alt="" onClick={() => handleClick(movie)} />
       )}
       {isInWatchList && (
         <img
           src={WatchListAddedIcon}
           alt=""
-          variant="outlined"
           onClick={() => handleClick(movie)}
         />
       )}
 
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           {alertMsg}
         </Alert>
       </Snackbar>
-      {/* <Alert severity="error">This is an error message!</Alert>
-      <Alert severity="warning">This is a warning message!</Alert>
-      <Alert severity="info">This is an information message!</Alert>
-      <Alert severity="success">This is a success message!</Alert> */}
     </Stack>
   );
 }

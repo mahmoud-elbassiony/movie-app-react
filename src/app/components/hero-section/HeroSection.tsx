@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import { SearchForm } from "../search-form/SearchForm";
 import landingImg from "../../../assests/hero.jpg";
 import "./hero-section.css";
 
@@ -18,10 +16,4 @@ export const HeroSection = () => {
       </div>
     </div>
   );
-  // return (
-  //   <div style={{ backgroundColor: "#eee" }} className="py-5">
-
-  //     <SearchForm />
-  //   </div>
-  // );
 };

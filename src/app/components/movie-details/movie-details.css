@@ -8,23 +8,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
 }
-
-/* .movie-details .container {
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -15%;
-}
-
-.movie-details .container .poster-img {
-  width: 30%;
-}
-.movie-details .container .movie-content {
-  width: 60%;
-}
-.overview {
-  margin-top: 100px !important;
-} */
-
 .movie-details .poster-img {
   position: absolute;
   bottom: -12%;
@@ -32,7 +15,6 @@
   max-width: 25%;
   left: 10%;
 }
-
 .movie-content {
   position: absolute;
   right: 50px;
