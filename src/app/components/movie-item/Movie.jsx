@@ -7,6 +7,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import watchListAddIcon from "../../../assests/watch-list-add.svg";
 import WatchListAddedIcon from "../../../assests/watch-list-added.svg";
+import Snakbar from "../snackbar/Snackbar";
 
 export const Movie = ({ movie }) => {
   const navigte = useNavigate();
@@ -40,9 +41,13 @@ export const Movie = ({ movie }) => {
     dispatch(toggle(movie));
     let index = watchListState.findIndex((mov) => mov.id === movie.id);
     if (index !== -1) {
-      setTest(false);
+      setTimeout(() => {
+        setTest(false);
+      }, 2000);
     } else {
-      setTest(true);
+      setTimeout(() => {
+        setTest(true);
+      }, 2000);
     }
   };
 
@@ -80,13 +85,13 @@ export const Movie = ({ movie }) => {
         <div
           className="position-absolute top-0 start-0"
           style={{ cursor: "pointer", width: "40px" }}
-          onClick={() => toggleWatchList(movie)}
         >
           {/* {!isInWatchList && <FavoriteBorderOutlinedIcon fontSize="large" />} */}
 
           {/* {isInWatchList && <FavoriteOutlinedIcon fontSize="large" />} */}
-          {!test && <img src={watchListAddIcon} alt="" />}
-          {test && <img src={WatchListAddedIcon} alt="" />}
+          {/* {!test && <img src={watchListAddIcon} alt="" />} */}
+          <Snakbar movie={movie} />
+          {/* {test && <img src={WatchListAddedIcon} alt="" />} */}
           {/* {!isInWatchList && <img src={watchListAddIcon} alt="" />}
           {isInWatchList && <img src={WatchListAddedIcon} alt="" />} */}
         </div>

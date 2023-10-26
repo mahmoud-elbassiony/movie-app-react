@@ -22,7 +22,7 @@ const watchListSlice = createSlice({
         //   return mov;
         // });
 
-        // console.log("mov stat add", state.movies);
+        // console.log("mov stat add", state.value);
         // console.log("mov stat ad", state.movies);
         // const newPayload = Object.assign({}, action.payload, {
         //   isInWatchList: true,

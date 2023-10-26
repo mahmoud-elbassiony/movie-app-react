@@ -35,9 +35,16 @@ export const Search = () => {
       </div>
 
       {isLoading && <p>loading ...</p>}
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gx-4 gy-5 text-white">
-        {searchResultsList}
-      </div>
+      {error && <p>{error.message}</p>}
+      {searchResultsList.length > 0 ? (
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gx-4 gy-5 text-white">
+          {searchResultsList}
+        </div>
+      ) : (
+        <div>
+          <p className="text-white">No results</p>
+        </div>
+      )}
     </div>
   );
 };

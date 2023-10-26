@@ -51,16 +51,19 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <ul className="d-md-flex gap-2 p-0 d-none">
+        <ul className="d-lg-flex gap-2 p-0 d-none">
           <li>
             <Link to={"/"}>Home</Link>
           </li>
           <li>
             <Link to={"/watchlist"}>Watchlist</Link>
           </li>
+          <li>
+            <Link>Login</Link>
+          </li>
         </ul>
 
-        <div className="d-md-none gap-2 p-0 d-block text-white">
+        <div className="d-lg-none gap-2 p-0 d-block text-white">
           {/* <MenuIcon /> */}
           <TemporaryDrawer />
         </div>

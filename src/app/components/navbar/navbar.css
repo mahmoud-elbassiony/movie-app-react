@@ -20,24 +20,23 @@
   border-radius: 5px;
 }
 .navbar .search {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #ffffff;
 }
 .navbar .search-input {
   border: none;
   outline: none;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border-radius: 5px;
   overflow: hidden;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .navbar .search::placeholder {
   color: #777;
 }
 .navbar .search-icon {
   height: 34px;
-  padding: 5px;
-  padding-left: 10px;
+  padding: 5px 10px;
   cursor: pointer;
   border-left: 1px solid #ddd;
 }
@@ -50,7 +49,9 @@
 
   .navbar .search-icon {
     border-left: none;
-    padding-right: 10px;
     border-right: 1px solid #ddd;
+  }
+  .navbar .search-input {
+    color: white;
   }
 }

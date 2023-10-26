@@ -44,8 +44,9 @@ export const Filter = ({ movies }) => {
       aria-label="Default select example"
       style={{ width: "fit-content" }}
       onChange={handleChange}
+      defaultValue="Media Type"
     >
-      <option selected> Media Type</option>
+      <option value=""> Media Type</option>
       <option value="movie">movie</option>
       <option value="tv">tv</option>
       <option value="all">all</option>

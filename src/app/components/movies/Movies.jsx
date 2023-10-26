@@ -25,13 +25,14 @@ export const Movies = ({ movies, isLoading, error }) => {
   ));
 
   return (
-    <div className="container py-5">
-      <div className="d-flex justify-content-between align-items-center mb-4 text-white">
+    <div className="container py-5 text-white">
+      <div className="d-flex justify-content-between align-items-center mb-4 ">
         <h4 className="">Latest movies</h4>
         <Filter movies={movies} />
       </div>
       <h2>{isLoading}</h2>
       {isLoading && <p>loading .... </p>}
+      {error && <p>{error.message} </p>}
       {moviesList && (
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gx-4 gy-5 text-white">
           {moviesList}

@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
-import "./movie-details.css";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { toggle } from "../../features/watch-List/watchListSlice";
 import { useDispatch, useSelector } from "react-redux";
-import watchListAddIcon from "../../../assests/watch-list-add.svg";
-import WatchListAddedIcon from "../../../assests/watch-list-added.svg";
 import Snakbar from "../snackbar/Snackbar";
 
 export const MovieDetails = () => {
@@ -44,10 +39,8 @@ export const MovieDetails = () => {
 
   return (
     <div>
-      {isLoading && <p>loading ...</p>}
-      {error && <p>{error.message}</p>}
-      {movieDetails && (
-        <div>
+      {movieDetails &&
+        ((
           <div className="movie-details position-relative ">
             <img
               src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
@@ -61,14 +54,17 @@ export const MovieDetails = () => {
             </div>
             <div className="movie-content text-white d-flex flex-column  ">
               <div className="d-flex justify-content-between align-items-center">
+                {" "}
                 <h2>{movieDetails.title ?? movieDetails.name}</h2>
                 <div
                   className="watchlist-icon ms-auto"
                   style={{ cursor: "pointer", width: "2.25rem" }}
                 >
                   <Snakbar movie={movieDetails} />
+                  {/* {!isInWatchList && <img src={watchListAddIcon} alt="" />}
+                {isInWatchList && <img src={WatchListAddedIcon} alt="" />} */}
                 </div>
-              </div>
+              </div>{" "}
               <div className=" d-flex gap-2 my-1 flex-wrap ">
                 {movieDetails?.genres?.map((gen) => (
                   <p
@@ -100,13 +96,14 @@ export const MovieDetails = () => {
                   <p className="fw-bold mb-1">{movieDetails.status}</p>
                 </div>
               </div>
-            </div>
+            </div>{" "}
           </div>
+        ),
+        (
           <div className="container  " style={{ marginBottom: "10%" }}>
             <p className="overview text-white">{movieDetails.overview}</p>
           </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 
@@ -140,7 +137,6 @@ export const MovieDetails = () => {
   //                 {isInWatchList && <FavoriteOutlinedIcon />} */}
   //               </div>
   //             </div>
-
   //             {/* <p className="overview">{movieDetails.overview}</p> */}
   //             <div className="d-flex gap-2 my-3">
   //               {movieDetails?.genres?.map((gen) => (
@@ -152,7 +148,6 @@ export const MovieDetails = () => {
   //               {movieDetails.release_date ?? movieDetails.last_air_date}
   //             </p>
   //             <p className="mt-1">Duration: {movieDetails.runtime}m</p>
-
   //             <div className="mt-3 d-flex align-items-center">
   //               <div
   //                 className="d-flex align-items-baseline pe-3"
@@ -180,7 +175,6 @@ export const MovieDetails = () => {
   //     </div>
   //   </div>
   // );
-
   //
   // return (
   //   <div
@@ -193,7 +187,6 @@ export const MovieDetails = () => {
   //       src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
   //       alt=""
   //     />
-
   //     <div className="container position-absolute">
   //       <div className="d-flex gap-5 align-items-center">
   //         <div className="">
@@ -212,7 +205,6 @@ export const MovieDetails = () => {
   //           </div>
   //           <p>{movieDetails.release_date ?? movieDetails.last_air_date}</p>
   //           <p>{movieDetails.runtime}</p>
-
   //           <div className="mt-auto d-flex">
   //             <div
   //               className="d-flex align-items-baseline pe-3"
