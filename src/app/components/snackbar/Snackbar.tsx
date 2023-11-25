@@ -10,6 +10,7 @@ import { toggle } from "../../features/watch-List/watchListSlice";
 import { MovieType } from "../../types/Movie";
 import { MovieDetailsType } from "../../types/MovieDetails";
 import { StoreState } from "../../../store";
+import "./snackbar.css";
 
 type SnackbarProps = {
   movie: MovieType | MovieDetailsType;
@@ -66,10 +67,16 @@ export default function CustomizedSnackbars({ movie }: SnackbarProps) {
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       {!isInWatchList && (
-        <img src={watchListAddIcon} alt="" onClick={() => handleClick(movie)} />
+        <img
+          style={{ width: "1.75rem" }}
+          src={watchListAddIcon}
+          alt=""
+          onClick={() => handleClick(movie)}
+        />
       )}
       {isInWatchList && (
         <img
+          style={{ width: "1.75rem" }}
           src={WatchListAddedIcon}
           alt=""
           onClick={() => handleClick(movie)}

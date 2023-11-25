@@ -1,0 +1,16 @@
+.MuiPagination-ul li > * {
+  color: white;
+}
+.MuiPagination-ul li button {
+  border: 1px solid white;
+  transition: 0.25s all;
+}
+.MuiPagination-ul li button:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: #22b9d5;
+}
+.MuiPaginationItem-root.Mui-selected {
+  background-color: rgb(255, 255, 255) !important;
+  color: #22b9d5;
+  font-weight: 500;
+}

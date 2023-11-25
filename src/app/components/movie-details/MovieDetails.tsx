@@ -15,118 +15,131 @@ export const MovieDetails = () => {
   );
 
   return (
-    <div>
-      {isLoading && <p>loading ...</p>}
+    <div className="text-white">
       {error && <p>{error.message}</p>}
-      {movieDetails && (
-        <div>
-          <div className="movie-details position-relative ">
-            <img
-              src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
-              alt=""
-            />
-            <div className="poster-img">
+      {isLoading ? (
+        <h3 className="text-center">loading ...</h3>
+      ) : (
+        movieDetails && (
+          <div>
+            <div className="movie-details position-relative">
               <img
-                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
                 alt=""
               />
-            </div>
-            <div className="movie-content text-white d-flex flex-column  ">
-              <div className="d-flex justify-content-between align-items-center">
-                <h2>{movieDetails.title ?? movieDetails.name}</h2>
-                <div
-                  className="watchlist-icon ms-auto"
-                  style={{ cursor: "pointer", width: "2.25rem" }}
-                >
-                  <Snakbar movie={movieDetails} />
+              <div
+                className="movie-details-container position-absolute d-flex justify-content-between"
+                style={{ bottom: "-10%", left: "10%", width: "80%" }}
+              >
+                <div className="poster-img">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                    alt=""
+                  />
                 </div>
-              </div>
-              <div className=" d-flex gap-2 my-1 flex-wrap ">
-                {movieDetails?.genres?.map(
-                  (gen: { id: number; name: string }) => (
-                    <p
-                      key={gen.id}
-                      className=" gategory rounded-pill border-none border-sm"
+                <div className="movie-content text-white d-flex flex-column ">
+                  <div className="d-flex justify-content-between ">
+                    <h2>{movieDetails.title ?? movieDetails.name}</h2>
+                    <div
+                      className="watchlist-icon ms-2"
+                      style={{ cursor: "pointer", width: "1.75rem" }}
                     >
-                      {gen.name}
-                    </p>
-                  )
-                )}
-              </div>
-              <p className="fs-6">
-                Release Date:{" "}
-                {movieDetails.release_date ?? movieDetails.last_air_date}
-              </p>
-              <div className="mt-3 d-flex align-items-center">
-                <div
-                  className="d-flex align-items-baseline pe-3"
-                  style={{ borderRight: "1px solid #ddd" }}
-                >
-                  <p className=" fw-bold fs-3 me-1 mb-0">
-                    {movieDetails.vote_average?.toFixed(1)}
+                      <Snakbar movie={movieDetails} />
+                    </div>
+                  </div>
+                  <div className=" d-flex gap-2 my-1 flex-wrap ">
+                    {movieDetails?.genres?.map(
+                      (gen: { id: number; name: string }) => (
+                        <p
+                          key={gen.id}
+                          className=" gategory rounded-pill border-none border-sm"
+                        >
+                          {gen.name}
+                        </p>
+                      )
+                    )}
+                  </div>
+                  <p className="fs-6">
+                    Release Date:{" "}
+                    {movieDetails.release_date ?? movieDetails.last_air_date}
                   </p>
-                  <span style={{ fontSize: " 12px", fontWeight: "500" }}>
-                    IMDb
-                  </span>
-                </div>
-                <div className="ps-3">
-                  <p className="mb-0">Status</p>
-                  <p className="fw-bold mb-1">{movieDetails.status}</p>
+                  <div className="mt-3 d-flex align-items-center">
+                    <div
+                      className="d-flex align-items-baseline pe-3"
+                      style={{ borderRight: "1px solid #ddd" }}
+                    >
+                      <p className=" fw-bold fs-3 me-1 mb-0">
+                        {movieDetails.vote_average?.toFixed(1)}
+                      </p>
+                      <span style={{ fontSize: " 12px", fontWeight: "500" }}>
+                        IMDb
+                      </span>
+                    </div>
+                    <div className="ps-3">
+                      <p className="mb-0">Status</p>
+                      <p className="fw-bold mb-1">{movieDetails.status}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/*  */}
+            <div
+              className="container overview mb-5"
+              style={{ marginTop: "10%" }}
+            >
+              <p className="text-white">{movieDetails.overview}</p>
+            </div>
           </div>
-          <div className="container  " style={{ marginTop: "10%" }}>
-            <p className="overview text-white">{movieDetails.overview}</p>
-          </div>
-        </div>
+        )
       )}
     </div>
   );
 
   // return (
   //   <div>
-  //     <div className="movie-details position-relative ">
-  //       <img
-  //         src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
-  //         alt=""
-  //       />
-  //       <div className="container position-absolute">
-  //         <div className="d-flex gap-5 align-items-start">
+  //     {isLoading && <p>loading ...</p>}
+  //     {error && <p>{error.message}</p>}
+  //     {movieDetails && (
+  //       <div>
+  //         <div className="movie-details position-relative ">
+  //           <img
+  //             src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieDetails.backdrop_path}`}
+  //             alt=""
+  //           />
   //           <div className="poster-img">
   //             <img
   //               src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
   //               alt=""
   //             />
   //           </div>
-  //           <div className="text-white d-flex flex-column movie-content ">
+  //           <div className="movie-content text-white d-flex flex-column  ">
   //             <div className="d-flex justify-content-between align-items-center">
-  //               {" "}
   //               <h2>{movieDetails.title ?? movieDetails.name}</h2>
   //               <div
-  //                 className="ms-auto"
-  //                 style={{ cursor: "pointer", width: "40px" }}
-  //                 onClick={() => toggleWatchList(movieDetails)}
+  //                 className="watchlist-icon ms-auto"
+  //                 style={{ cursor: "pointer", width: "2.25rem" }}
   //               >
-  //                 {!isInWatchList && <img src={watchListAddIcon} alt="" />}
-  //                 {isInWatchList && <img src={WatchListAddedIcon} alt="" />}
-  //                 {/* {!isInWatchList && <FavoriteBorderOutlinedIcon />}
-  //                 {isInWatchList && <FavoriteOutlinedIcon />} */}
+  //                 <Snakbar movie={movieDetails} />
   //               </div>
   //             </div>
-
-  //             {/* <p className="overview">{movieDetails.overview}</p> */}
-  //             <div className="d-flex gap-2 my-3">
-  //               {movieDetails?.genres?.map((gen) => (
-  //                 <p className="rounded-pill border px-3 py-1">{gen.name}</p>
-  //               ))}
+  //             <div className=" d-flex gap-2 my-1 flex-wrap ">
+  //               {movieDetails?.genres?.map(
+  //                 (gen: { id: number; name: string }) => (
+  //                   <p
+  //                     key={gen.id}
+  //                     className=" gategory rounded-pill border-none border-sm"
+  //                   >
+  //                     {gen.name}
+  //                   </p>
+  //                 )
+  //               )}
   //             </div>
-  //             <p>
+  //             <p className="fs-6">
   //               Release Date:{" "}
   //               {movieDetails.release_date ?? movieDetails.last_air_date}
   //             </p>
-  //             <p className="mt-1">Duration: {movieDetails.runtime}m</p>
-
   //             <div className="mt-3 d-flex align-items-center">
   //               <div
   //                 className="d-flex align-items-baseline pe-3"
@@ -146,12 +159,11 @@ export const MovieDetails = () => {
   //             </div>
   //           </div>
   //         </div>
+  //         <div className="container  " style={{ marginTop: "10%" }}>
+  //           <p className="overview text-white">{movieDetails.overview}</p>
+  //         </div>
   //       </div>
-  //     </div>
-  //     <div className="container text-white my-5">
-  //       {" "}
-  //       <p className="overview">{movieDetails.overview}</p>
-  //     </div>
+  //     )}
   //   </div>
   // );
 };

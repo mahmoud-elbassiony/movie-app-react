@@ -13,11 +13,10 @@ export const useFetch = (url: string) => {
   useEffect(() => {
     const getData = async () => {
       setIsloading(true);
+      setError(null);
       try {
         const res = await axios.get(url);
         setData(res.data);
-        console.log(res.data);
-        setError(null);
       } catch (err: any) {
         setError(err);
       }

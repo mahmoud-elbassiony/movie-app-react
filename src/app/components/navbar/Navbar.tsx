@@ -1,17 +1,25 @@
 import React, { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assests/logo.svg";
+import icon1 from "../../../assests/watch-list-add-0.svg";
+import icon2 from "../../../assests/watch-list-add.svg";
 import "./navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import { StoreState } from "../../../store";
 
 import TemporaryDrawer from "../drawer/Drawer";
+import { useSelector } from "react-redux";
 
 export const Navbar = () => {
   const [input, setInput] = useState("");
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
+
+  const watchListItemsCount = useSelector(
+    (state: StoreState) => state.watchList.value.length
+  );
 
   return (
     <nav className="navbar">
@@ -30,20 +38,44 @@ export const Navbar = () => {
             onChange={handleInput}
           />
           <div className="search-icon">
-            <Link to={`/${input}`}>
+            <Link to={`/search/${input}`}>
               <SearchIcon />
             </Link>
           </div>
         </div>
         <ul className="d-lg-flex gap-2 p-0 d-none">
           <li>
-            <Link to={"/"}>Home</Link>
+            <NavLink
+              to={"/"}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to={"/watchlist"}>Watchlist</Link>
+            <NavLink
+              to={"/watchlist"}
+              className={({ isActive }) =>
+                isActive
+                  ? "active d-flex align-items-center gap-2"
+                  : "d-flex align-items-center gap-2"
+              }
+            >
+              {" "}
+              <span className="icon-watch-list-add fs-5"></span>
+              Watchlist
+              {watchListItemsCount > 0 && (
+                <span className="counter">{watchListItemsCount}</span>
+              )}
+            </NavLink>
           </li>
           <li>
-            <Link to={"/"}>Login</Link>
+            <NavLink
+              to={"/login"}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Login
+            </NavLink>
           </li>
         </ul>
         <div className="d-lg-none gap-2 p-0 d-block text-white">
