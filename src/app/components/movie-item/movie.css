@@ -1,0 +1,12 @@
+.movie-title {
+  font-size: 16px;
+}
+.movie-card {
+  overflow: hidden;
+}
+.movie-card__img {
+  transition: 0.3s ease;
+}
+.movie-card__img:hover {
+  transform: scale(1.1);
+}

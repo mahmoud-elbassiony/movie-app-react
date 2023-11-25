@@ -20,6 +20,9 @@ ul {
 p {
   margin: 0 !important;
 }
+.white-background {
+  background-color: white !important;
+}
 @media (max-width: 575px) {
   :root {
     font-size: 0.75rem !important;
