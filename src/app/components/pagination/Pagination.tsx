@@ -2,11 +2,6 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./pagination.css";
-import { useSelector } from "react-redux";
-import { StoreState } from "../../../store";
-import { useFetch } from "../../hooks/useFetch";
-import { setMovies } from "../../features/watch-List/watchListSlice";
-import { useDispatch } from "react-redux";
 
 type PaginationProps = {
   currPage: number;
@@ -29,7 +24,6 @@ export const PaginationCom = ({
       left: 0,
       behavior: "smooth",
     });
-    console.log("vall", value);
   };
 
   return (

@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { ChangeEvent, useRef, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assests/logo.svg";
 import icon1 from "../../../assests/watch-list-add-0.svg";
 import icon2 from "../../../assests/watch-list-add.svg";
@@ -9,14 +9,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { StoreState } from "../../../store";
 
 import TemporaryDrawer from "../drawer/Drawer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMedia } from "../../features/media/mediaSlice";
 
 export const Navbar = () => {
-  const [input, setInput] = useState("");
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
+  // const [input, setInput] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+  // const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setInput(e.target.value);
+  //   dispatch(setMedia("all"));
+  // };
+  const navigate = useNavigate();
   const watchListItemsCount = useSelector(
     (state: StoreState) => state.watchList.value.length
   );
@@ -34,13 +38,22 @@ export const Navbar = () => {
             type="search"
             placeholder="Search movies, tv shows and more ..."
             className="search-input flex-grow-1  d-md-flex bg-transparent "
-            value={input}
-            onChange={handleInput}
+            ref={searchInputRef}
+            // onChange={handleInput}
           />
           <div className="search-icon">
-            <Link to={`/search/${input}`}>
+            <button
+              className="btn p-0"
+              onClick={() => {
+                navigate(`/search/${searchInputRef.current?.value}`);
+                dispatch(setMedia("all"));
+              }}
+            >
               <SearchIcon />
-            </Link>
+            </button>
+            {/* <Link to={`/search/${input}`}>
+              <SearchIcon />
+            </Link> */}
           </div>
         </div>
         <ul className="d-lg-flex gap-2 p-0 d-none">
