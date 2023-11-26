@@ -105,16 +105,18 @@ export default function TemporaryDrawer() {
       return;
     }
 
-    setState({ ...state, left: open });
+    setState({ ...state, top: open });
   };
 
   const list = () => (
     <Box
       sx={{
-        width: 250,
-        backgroundColor: "#fff",
-        color: "#000",
+        width: "100%",
+        // backgroundColor: "#fff",
+        // color: "#000",
         height: "100%",
+        backgroundColor: "#000",
+        color: "#fff",
       }}
       role="presentation"
       onClick={toggleDrawer(false)}
@@ -123,7 +125,7 @@ export default function TemporaryDrawer() {
       <List>
         {["Home", "Watchlist", "Login"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton sx={{ textAlign: "center" }}>
               {/* <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon> */}
@@ -146,7 +148,7 @@ export default function TemporaryDrawer() {
       </div>
 
       {/* <Button onClick={toggleDrawer(true)}>Open Left Drawer</Button> */}
-      <Drawer anchor="left" open={state.left} onClose={toggleDrawer(false)}>
+      <Drawer anchor="top" open={state.top} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
     </div>
