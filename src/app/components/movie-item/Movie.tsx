@@ -12,15 +12,11 @@ type MovieProps = {
 export const Movie = ({ movie }: MovieProps) => {
   const navigte = useNavigate();
 
-  const { title, poster_path, name, id, media_type, vote_average } = movie;
-
   const navigteToDetails = () => {
-    navigte(`/movie/${id}/${media_type}`);
+    navigte(`/movie/${movie?.id}/${movie?.media_type}`);
   };
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-
-  console.log(imgRef.current?.complete);
 
   return (
     <div className="col">
@@ -31,8 +27,8 @@ export const Movie = ({ movie }: MovieProps) => {
             cursor: "pointer",
           }}
           src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+            movie?.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
               : defaultImage
           }
           alt=""
@@ -63,20 +59,23 @@ export const Movie = ({ movie }: MovieProps) => {
             onClick={navigteToDetails}
           />
         </div> */}
-        <div
-          className="position-absolute top-0 end-0 text-white p-3 d-flex justify-content-center align-items-center"
-          style={{
-            width: "38px",
-            height: "45px",
-            fontWeight: "500",
-            backgroundColor:
-              vote_average && parseFloat(vote_average.toFixed(1)) >= 7
-                ? "#108eb0"
-                : "#f7d34ff2",
-          }}
-        >
-          {vote_average && parseFloat(vote_average.toFixed(1))}
-        </div>
+        {movie?.vote_count > 0 && (
+          <div
+            className="position-absolute top-0 end-0 text-white p-3 d-flex justify-content-center align-items-center"
+            style={{
+              width: "38px",
+              height: "45px",
+              fontWeight: "500",
+              backgroundColor:
+                movie?.vote_average &&
+                parseFloat(movie?.vote_average.toFixed(1)) >= 7
+                  ? "#108eb0"
+                  : "#f7d34ff2",
+            }}
+          >
+            {movie?.vote_average && parseFloat(movie?.vote_average.toFixed(1))}
+          </div>
+        )}
         <div
           className="position-absolute top-0 start-0"
           style={{ cursor: "pointer" }}
@@ -85,7 +84,9 @@ export const Movie = ({ movie }: MovieProps) => {
         </div>
       </div>
 
-      <h6 className="mt-2 text-center mt-3 movie-title">{title ?? name}</h6>
+      <h6 className="mt-2 text-center mt-3 movie-title">
+        {movie?.title ?? movie?.name}
+      </h6>
     </div>
   );
 };

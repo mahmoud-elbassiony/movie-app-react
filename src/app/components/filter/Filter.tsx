@@ -1,42 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setMovies } from "../../features/watch-List/watchListSlice";
-import { MovieType } from "../../types/Movie";
+import { useDispatch, useSelector } from "react-redux";
+import { setMedia } from "../../features/media/mediaSlice";
+import { StoreState } from "../../../store";
 
-type FilterProps = {
-  movies: MovieType[];
+type FilterPropsType = {
+  updateCurrPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const Filter = ({ movies }: FilterProps) => {
-  const [mediaType, setMediaType] = useState("");
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMediaType(event.target.value);
-  };
-
+export const Filter = ({ updateCurrPage }: FilterPropsType) => {
+  const mediaType = useSelector((state: StoreState) => state.media.mediaType);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    let isSubscribed = true;
-    console.log("movies", movies);
-
-    if (isSubscribed) {
-      if (movies) {
-        if (mediaType === "all" || mediaType === "") {
-          dispatch(setMovies(movies));
-        } else {
-          let filterd = movies?.filter(
-            (movie) => movie.media_type === mediaType
-          );
-          filterd && dispatch(setMovies(filterd));
-          console.log(filterd);
-        }
-      }
-    }
-
-    return () => {
-      isSubscribed = false;
-    };
-  }, [mediaType, movies, dispatch]);
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setMedia(event.target.value));
+    updateCurrPage(1);
+  };
 
   return (
     <select
@@ -44,9 +22,8 @@ export const Filter = ({ movies }: FilterProps) => {
       aria-label="Default select example"
       style={{ width: "fit-content", cursor: "pointer" }}
       onChange={handleChange}
-      defaultValue="Media Type"
+      defaultValue={mediaType}
     >
-      <option value=""> Media Type</option>
       <option value="movie">movie</option>
       <option value="tv">tv</option>
       <option value="all">all</option>
