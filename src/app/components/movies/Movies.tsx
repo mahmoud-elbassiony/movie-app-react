@@ -43,7 +43,7 @@ export const Movies = () => {
       ) : (
         moviesList && (
           <div className="text-white d-flex flex-column align-items-center gap-5 ">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gx-4 gy-5 ">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 gx-4 gy-5 ">
               {moviesList}
             </div>
             <PaginationCom

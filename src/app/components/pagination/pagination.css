@@ -4,6 +4,7 @@
 .MuiPagination-ul li button {
   border: 1px solid white;
   transition: 0.25s all;
+  margin: 0.25rem;
 }
 .MuiPagination-ul li button:hover {
   background-color: rgb(255, 255, 255) !important;

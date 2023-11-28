@@ -5,3 +5,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media (max-width: 768px) {
+  .watchlist-icon-container {
+    width: 1.7rem;
+  }
+}
