@@ -27,7 +27,7 @@ export const PaginationCom = ({
   };
 
   return (
-    <Stack spacing={3}>
+    <Stack>
       <Pagination
         count={totalPages}
         page={currPage}

@@ -57,7 +57,7 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
           <div className="d-flex justify-content-between align-items-start">
             <h3>{title ?? name}</h3>
             <div
-              className="ms-2"
+              className="watchlist-icon-container ms-2"
               style={{ cursor: "pointer", maxWidth: "30px" }}
               onClick={() => toggleWatchList(movie)}
             >

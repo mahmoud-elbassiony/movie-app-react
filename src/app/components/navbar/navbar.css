@@ -79,3 +79,7 @@ a.active .icon-watch-list-add:before {
     color: white;
   }
 }
+
+.show {
+  transform: translateY(0) !important;
+}

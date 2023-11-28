@@ -1,12 +1,13 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "../../../assests/logo.svg";
+import logo from "../../../assests/logo-01.png";
 import "./navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { StoreState } from "../../../store";
 import TemporaryDrawer from "../drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { setMedia } from "../../features/media/mediaSlice";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export const Navbar = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,32 @@ export const Navbar = () => {
   const watchListItemsCount = useSelector(
     (state: StoreState) => state.watchList.value.length
   );
+  const dropdownMenue = useRef<HTMLUListElement>(null);
+  const menuIcon = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const h: HTMLElement = event.target as HTMLElement;
+
+      if (
+        menuIcon.current &&
+        !menuIcon.current.contains(h) &&
+        dropdownMenue.current?.classList.contains("show")
+      ) {
+        dropdownMenue.current?.classList.remove("show");
+        console.log("out");
+      } else if (menuIcon.current && menuIcon.current.contains(h)) {
+        dropdownMenue.current?.classList.toggle("show");
+        console.log("in");
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
@@ -63,9 +90,48 @@ export const Navbar = () => {
             <NavLink to={"/login"}>Login</NavLink>
           </li>
         </ul>
-        <div className="d-lg-none gap-2 p-0 d-block text-white">
-          <TemporaryDrawer />
+        <div className="d-lg-none gap-2 p-0 d-flex text-white">
+          <div style={{ zIndex: "3" }} ref={menuIcon}>
+            <MenuIcon sx={{ cursor: "pointer" }} />
+          </div>
+
+          <ul
+            className="position-absolute start-0 top-0 w-100 d-flex flex-column gap-2 py-5"
+            // style={{ display: "none" }}
+            style={{
+              transform: "translateY(-100%)",
+              transition: "all 0.35s ease-in-out",
+              backgroundColor: "#000",
+            }}
+            ref={dropdownMenue}
+          >
+            <li>
+              <NavLink to={"/"} className="text-center">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/watchlist"}
+                className="d-flex align-items-center gap-2 justify-content-center"
+              >
+                <span className="icon-watch-list-add fs-5"></span>
+                Watchlist
+                {watchListItemsCount > 0 && (
+                  <span className="counter">{watchListItemsCount}</span>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/login"} className="text-center">
+                Login
+              </NavLink>
+            </li>
+          </ul>
         </div>
+        {/* <div className="d-lg-none gap-2 p-0 d-block text-white">
+          <TemporaryDrawer />
+        </div> */}
       </div>
     </nav>
   );
