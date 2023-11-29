@@ -3,7 +3,7 @@ import { MovieDetailsType } from "../../types/MovieDetails";
 import { MovieType } from "../../types/Movie";
 
 export type WatchListState = {
-  value: MovieType[] | MovieDetailsType[];
+  value: (MovieType | MovieDetailsType)[];
   movies: MovieType[];
 };
 

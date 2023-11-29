@@ -10,22 +10,19 @@ import { MovieDetailsType } from "../../types/MovieDetails";
 import { StoreState } from "../../../store";
 
 type WatchListItemProps = {
-  movie: MovieType;
+  movie: MovieDetailsType | MovieType;
 };
 
 export const WatchListItem = ({ movie }: WatchListItemProps) => {
-  const { title, poster_path, name, id, media_type, vote_average, overview } =
-    movie;
-
   const dispatch = useDispatch();
   const [isInWatchList, setIsInWatchList] = useState(false);
   const watchListState = useSelector(
     (state: StoreState) => state.watchList.value
   );
 
-  const toggleWatchList = (movie: MovieType) => {
+  const toggleWatchList = (movie: MovieType | MovieDetailsType) => {
     dispatch(toggle(movie));
-    let index = watchListState.findIndex((mov) => mov.id === id);
+    let index = watchListState.findIndex((mov) => mov.id === movie.id);
     if (index !== -1) {
       setIsInWatchList(false);
     } else {
@@ -34,7 +31,7 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
   };
 
   useEffect(() => {
-    let index = watchListState.findIndex((mov) => mov.id === id);
+    let index = watchListState.findIndex((mov) => mov.id === movie.id);
     if (index !== -1) {
       setIsInWatchList(true);
     }
@@ -46,8 +43,8 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
         <div className="col-12 col-sm-4">
           <img
             src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+              movie?.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                 : defaultImage
             }
             alt=""
@@ -55,7 +52,7 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
         </div>
         <div className="col-12 col-sm-8 ">
           <div className="d-flex justify-content-between align-items-start">
-            <h3>{title ?? name}</h3>
+            <h3>{movie?.title}</h3>
             <div
               className="watchlist-icon-container ms-2"
               style={{ cursor: "pointer", maxWidth: "30px" }}
@@ -66,12 +63,20 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
             </div>
           </div>
 
-          <p className="four-two-lines">{overview}</p>
+          <p className="four-two-lines">{movie.overview}</p>
           <div className="d-flex align-items-baseline pe-3">
-            <p className=" fw-bold fs-3 me-1 mb-0">
-              {vote_average?.toFixed(1)}
-            </p>
-            <span style={{ fontSize: " 12px", fontWeight: "500" }}>IMDb</span>
+            {movie.vote_count > 0 ? (
+              <>
+                <p className=" fw-bold fs-3 me-1 mb-0">
+                  {movie?.vote_average?.toFixed(1)}
+                </p>
+                <span style={{ fontSize: " 12px", fontWeight: "500" }}>
+                  IMDb
+                </span>
+              </>
+            ) : (
+              <p className=" fw-bold fs-5 me-1 mb-0">Not rated yet</p>
+            )}
           </div>
         </div>
       </div>
