@@ -1,3 +1,6 @@
+# Movies & TV shows Web Application (React.js)
+User can browse the movie app and able to see movies and tv shows, filter them, see movie or tv show details in addition to add them to watchlist.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Demo Link: https://movie-app-react-95.vercel.app/
