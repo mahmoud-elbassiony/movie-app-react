@@ -1,6 +1,9 @@
 import React from "react";
 
 export const NotFound = () => {
-  // document.body.classList.add("white-background");
-  return <div className="text-secondary">NotFound</div>;
+  return (
+    <div className="container mt-5">
+      <h2 className="text-white-50 text-center">Page Not Found</h2>
+    </div>
+  );
 };

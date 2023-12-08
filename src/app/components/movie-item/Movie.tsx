@@ -1,65 +1,53 @@
 import { useNavigate } from "react-router-dom";
-import defaultImage from "../../../assests/default-img.jpg";
+import defaultPosterImage from "../../../assests/default-poster.jpg";
 import Snakbar from "../snackbar/Snackbar";
 import { MovieType } from "../../types/Movie";
 import "./movie.css";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 type MovieProps = {
   movie: MovieType;
+  isLoading: boolean;
 };
 
-export const Movie = ({ movie }: MovieProps) => {
+export const Movie = ({ movie, isLoading }: MovieProps) => {
+  const [isImgLoading, setIsImgLoading] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
   const navigte = useNavigate();
 
   const navigteToDetails = () => {
-    navigte(`/movie/${movie?.id}/${movie?.media_type}`);
+    navigte(`/${movie?.id}/${movie?.media_type}`);
   };
-  const [isImgLoaded, setIsImgLoaded] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
 
   return (
     <div className="col">
-      <div className="movie-card position-relative">
-        <img
-          className="movie-card__img"
-          style={{
-            cursor: "pointer",
-          }}
-          src={
-            movie?.poster_path
-              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-              : defaultImage
-          }
-          alt=""
-          onClick={navigteToDetails}
-        />
-        {/* <div
-          style={{
-            background: "red",
-            height: "400px",
-            width: "400px",
-          }}
+      <div className={"movie-card position-relative"}>
+        <div
+          className={isImgLoading || isLoading ? "loading-img" : ""}
+          style={{ aspectRatio: "2/3" }}
         >
-          <img
-            onLoad={() => setIsImgLoaded(true)}
-            // ref={imgRef}
-            loading="lazy"
-            className="movie-card__img"
-            style={{
-              cursor: "pointer",
-              display: isImgLoaded ? "block" : "none",
-            }}
-            src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                : defaultImage
-            }
-            alt=""
-            onClick={navigteToDetails}
-          />
-        </div> */}
-        {movie?.vote_count > 0 && (
+          {!isLoading && (
+            <img
+              loading="lazy"
+              ref={imgRef}
+              onLoad={() => setIsImgLoading(false)}
+              className={"movie-card__img"}
+              style={{
+                cursor: "pointer",
+                height: isImgLoading ? "0" : "auto",
+              }}
+              src={
+                movie?.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : defaultPosterImage
+              }
+              alt=""
+              onClick={navigteToDetails}
+            />
+          )}
+        </div>
+
+        {!isLoading && movie?.vote_count > 0 && (
           <div
             className="position-absolute top-0 end-0 text-white p-3 d-flex justify-content-center align-items-center"
             style={{
@@ -76,16 +64,22 @@ export const Movie = ({ movie }: MovieProps) => {
             {movie?.vote_average && parseFloat(movie?.vote_average.toFixed(1))}
           </div>
         )}
-        <div
-          className="position-absolute top-0 start-0"
-          style={{ cursor: "pointer" }}
-        >
-          <Snakbar movie={movie} />
-        </div>
+        {!isLoading && (
+          <div
+            className="position-absolute top-0 start-0"
+            style={{ cursor: "pointer" }}
+          >
+            <Snakbar movie={movie} />
+          </div>
+        )}
       </div>
 
       <h6 className="mt-2 text-center mt-3 movie-title">
-        {movie?.title ?? movie?.name}
+        {isLoading ? (
+          <span className="loading-p loading-dark"></span>
+        ) : (
+          movie?.title ?? movie?.name ?? "No Title Found"
+        )}
       </h6>
     </div>
   );

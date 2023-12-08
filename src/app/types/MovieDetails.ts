@@ -26,6 +26,7 @@ export type MovieDetailsType = {
     name: string;
   }[];
   release_date: string;
+  last_air_date: string;
   revenue: number;
   runtime: number;
   spoken_languages: {
@@ -39,4 +40,6 @@ export type MovieDetailsType = {
   video: false;
   vote_average: number;
   vote_count: number;
+  name: string;
+  original_name: string;
 };

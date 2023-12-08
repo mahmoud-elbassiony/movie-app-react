@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import defaultImage from "../../../assests/default-img.jpg";
+import defaultPosterImage from "../../../assests/default-poster.jpg";
 import "./watch-list.css";
 import watchListAddIcon from "../../../assests/watch-list-add.svg";
 import WatchListAddedIcon from "../../../assests/watch-list-added.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle } from "./watchListSlice";
+import { toggle } from "../../features/watch-List/watchListSlice";
 import { MovieType } from "../../types/Movie";
 import { MovieDetailsType } from "../../types/MovieDetails";
 import { StoreState } from "../../../store";
@@ -35,7 +35,7 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
     if (index !== -1) {
       setIsInWatchList(true);
     }
-  }, [movie]);
+  }, [movie, watchListState]);
 
   return (
     <div className="col ">
@@ -45,17 +45,17 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
             src={
               movie?.poster_path
                 ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : defaultImage
+                : defaultPosterImage
             }
             alt=""
           />
         </div>
         <div className="col-12 col-sm-8 ">
           <div className="d-flex justify-content-between align-items-start">
-            <h3>{movie?.title}</h3>
+            <h3>{movie?.title ?? movie?.name ?? "No Title Found"}</h3>
             <div
               className="watchlist-icon-container ms-2"
-              style={{ cursor: "pointer", maxWidth: "30px" }}
+              style={{ cursor: "pointer", maxWidth: "20px" }}
               onClick={() => toggleWatchList(movie)}
             >
               {!isInWatchList && <img src={watchListAddIcon} alt="" />}
@@ -96,7 +96,7 @@ export const WatchListItem = ({ movie }: WatchListItemProps) => {
 //             src={
 //               poster_path
 //                 ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-//                 : defaultImage
+//                 : defaultPosterImage
 //             }
 //             alt=""
 //           />

@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { WatchListItem } from "../../features/watch-List/WatchListItem";
+import { WatchListItem } from "../../components/watchlistItem/WatchListItem";
 import { StoreState } from "../../../store";
 import { MovieDetailsType } from "../../types/MovieDetails";
 import { MovieType } from "../../types/Movie";
+import { Link } from "react-router-dom";
 
-export const WatchList = () => {
+export default function WatchList() {
   const watchListState = useSelector(
     (state: StoreState) => state.watchList.value
   );
@@ -22,10 +23,13 @@ export const WatchList = () => {
           {watchListItems}
         </div>
       ) : (
-        <div>
-          <p>No movies in your watchlist</p>
+        <div className="text-center">
+          <h3 className="mb-3">Your watchlist is empty</h3>
+          <Link to={"/"} className="btn main-btn-lg rounded-pill">
+            Browse trending
+          </Link>
         </div>
       )}
     </div>
   );
-};
+}
