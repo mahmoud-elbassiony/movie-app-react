@@ -1,4 +1,3 @@
-import React from "react";
 import landingImg from "../../../assests/hero.jpg";
 import "./hero-section.css";
 
@@ -10,11 +9,10 @@ export const HeroSection = () => {
         backgroundImage: `url(${landingImg})`,
       }}
     >
-      <div className="hero-content text-white container">
-        <div className="">
-          <p>A FILM BY CHRISTOPHER NOLAN</p>
-          <h1>OPENHEIMER</h1> <button className="btn ">Watch Now!</button>
-        </div>
+      <div className="hero-content text-white">
+        <p>A FILM BY CHRISTOPHER NOLAN</p>
+        <h1>OPENHEIMER</h1>{" "}
+        <button className="btn main-btn-lg rounded-pill">Watch Now!</button>
       </div>
     </div>
   );

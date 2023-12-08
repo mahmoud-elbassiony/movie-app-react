@@ -1,6 +1,5 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import watchListAddIcon from "../../../assests/watch-list-add.svg";
@@ -51,7 +50,7 @@ export default function CustomizedSnackbars({ movie }: SnackbarProps) {
     if (index !== -1) {
       setIsInWatchList(true);
     }
-  }, [movie]);
+  }, [movie,watchListState]);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -60,7 +59,6 @@ export default function CustomizedSnackbars({ movie }: SnackbarProps) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 

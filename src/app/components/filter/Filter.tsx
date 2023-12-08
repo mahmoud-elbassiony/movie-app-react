@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMedia } from "../../features/media/mediaSlice";
+import { setMedia } from "../../features/moviesList/moviesListSlice";
 import { StoreState } from "../../../store";
 
-type FilterPropsType = {
-  updateCurrPage: React.Dispatch<React.SetStateAction<number>>;
-};
+// type FilterPropsType = {
+//   updateCurrPage: React.Dispatch<React.SetStateAction<number>>;
+// };
 
-export const Filter = ({ updateCurrPage }: FilterPropsType) => {
-  const mediaType = useSelector((state: StoreState) => state.media.mediaType);
+export const Filter = () => {
+  const mediaType = useSelector(
+    (state: StoreState) => state.moviesList.mediaType
+  );
   const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setMedia(event.target.value));
-    updateCurrPage(1);
   };
 
   return (
     <select
       className="form-select"
       aria-label="Default select example"
-      style={{ width: "fit-content", cursor: "pointer" }}
+      style={{ width: "fit-content", cursor: "pointer", zIndex: "1" }}
       onChange={handleChange}
       defaultValue={mediaType}
     >

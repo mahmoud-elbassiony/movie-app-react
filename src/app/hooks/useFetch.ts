@@ -11,16 +11,22 @@ export const useFetch = (url: string) => {
   const [error, setError] = useState<ErrorResponse | null>(null);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const getData = async () => {
       setIsloading(true);
       setError(null);
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url, { cancelToken: source.token });
         setData(res.data);
       } catch (err: any) {
         setError(err);
+      } finally {
+        setIsloading(false);
       }
-      setIsloading(false);
+
+      return () => {
+        source.cancel();
+      };
     };
 
     getData();

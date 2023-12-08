@@ -1,3 +1,8 @@
+:root {
+  /* --main-color: #5b96f9;
+  --main-color: #22b9d5; */
+  --main-color: #1795ac;
+}
 body {
   background-color: rgb(3, 3, 3) !important;
 }
@@ -20,21 +25,45 @@ ul {
 p {
   margin: 0 !important;
 }
+input:focus {
+  box-shadow: none !important;
+}
 .white-background {
   background-color: white !important;
 }
-@media (max-width: 575px) {
+.main-btn-lg {
+  text-transform: uppercase;
+  border: 2px solid white !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  padding: 8px 30px !important;
+  letter-spacing: 2px;
+}
+.main-btn-lg,
+.main-btn {
+  border: 1px solid white !important;
+  color: white !important;
+  background-color: transparent;
+  transition: 0.25s all;
+}
+.main-btn:hover,
+.main-btn-lg:hover,
+.main-btn.active {
+  background-color: rgb(245, 245, 245) !important;
+  color: var(--main-color) !important;
+}
+@media (max-width: 425px) {
   :root {
     font-size: 0.75rem !important;
   }
 }
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   :root {
     font-size: 0.875rem !important;
   }
-}
-@media (min-width: 768px) {
+} */
+/* @media (min-width: 768px) {
   :root {
     font-size: 1rem !important;
   }
-}
+} */
