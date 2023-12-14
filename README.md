@@ -1,5 +1,15 @@
-# Movies & TV shows Web Application (React.js)
-User can browse the movie app and able to see movies and tv shows, filter them, see movie or tv show details in addition to add them to watchlist.
+# Showstream Web Application (React.js)
+
+Showstream is a web application built using React.js and Typescript that helps you discover and manage your favorite movies and TV shows.
+
+Here are some of the key features and functionalities:
+- Discover trending movies and tv shows.
+- Filter by media type.
+- Search functionality.
+- Watchlist functionality.
+- Authentication and protected routes.
+- Lazy loading to enhance performance.
+- Responsive design.
 
 # Getting Started with Create React App
 
