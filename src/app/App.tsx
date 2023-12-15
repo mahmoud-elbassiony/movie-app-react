@@ -6,22 +6,6 @@ import { Suspense, lazy, useRef } from "react";
 import { Loader } from "./components/loader/Loader";
 import { useEffect } from "react";
 
-// const lazyLoad = (path: string, namedExport: string) => {
-//   return lazy(() =>
-//     import(path).then((module) => ({
-//       default: module[namedExport],
-//     }))
-//   );
-// };
-
-// const Search = lazyLoad("./pages/search/Search", "Search");
-
-// const Search = lazy(() =>
-//   import("./pages/search/Search").then((module) => ({
-//     default: module.Search,
-//   }))
-// );
-
 const Home = lazy(() => import("./pages/home/Home"));
 const MovieDetails = lazy(() => import("./pages/movie-details/MovieDetails"));
 const Search = lazy(() => import("./pages/search/Search"));
