@@ -5,6 +5,7 @@ import { NotFound } from "./pages/not found/NotFound";
 import { Suspense, lazy, useRef } from "react";
 import { Loader } from "./components/loader/Loader";
 import { useEffect } from "react";
+import ProtectedUserRoutes from "./pages/protectedRoutes/ProtectedUserRoutes";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const MovieDetails = lazy(() => import("./pages/movie-details/MovieDetails"));
@@ -39,7 +40,9 @@ function App() {
             path="/search/:input"
             element={<Search searchEl={searchEl} />}
           ></Route>
-          <Route path="/watchlist" element={<WatchList />}></Route>
+          <Route element={<ProtectedUserRoutes />}>
+            <Route path="/watchlist" element={<WatchList />}></Route>
+          </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signUp" element={<SignUp />}></Route>
           <Route path="*" element={<NotFound />}></Route>
