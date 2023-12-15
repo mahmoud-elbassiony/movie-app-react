@@ -1,10 +1,8 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { setCurrentPage } from "../../features/moviesList/moviesListSlice";
 import "./pagination.css";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../../../store";
+import { useMoviesContext } from "../../contexts/MoviesContext";
 
 type PaginationProps = {
   totalPages: number;
@@ -15,16 +13,13 @@ export const PaginationCom = ({
   totalPages,
   scrollTo = 0,
 }: PaginationProps) => {
-  const currentPage = useSelector(
-    (state: StoreState) => state.moviesList.currentPage
-  );
-  const dispatch = useDispatch();
+  const { currentPage, onPageChange } = useMoviesContext();
 
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    dispatch(setCurrentPage(value));
+    onPageChange(value);
     window.scrollTo({
       top: scrollTo,
       left: 0,

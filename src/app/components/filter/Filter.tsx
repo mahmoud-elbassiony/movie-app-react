@@ -1,19 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setMedia } from "../../features/moviesList/moviesListSlice";
-import { StoreState } from "../../../store";
-
-// type FilterPropsType = {
-//   updateCurrPage: React.Dispatch<React.SetStateAction<number>>;
-// };
+import { useMoviesContext } from "../../contexts/MoviesContext";
 
 export const Filter = () => {
-  const mediaType = useSelector(
-    (state: StoreState) => state.moviesList.mediaType
-  );
-  const dispatch = useDispatch();
+  const { mediaType, onMediaChange } = useMoviesContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setMedia(event.target.value));
+    onMediaChange(event.target.value);
   };
 
   return (
